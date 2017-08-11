@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "iapvt cli",
-    "cli": "iapvt -r -s",
+    "start": "iapvt",
+    "cli": "iapvt cli -r -s",
     "build": "iapvt build"
   },
   "repository": {
