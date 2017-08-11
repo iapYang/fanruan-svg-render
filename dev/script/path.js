@@ -17,17 +17,22 @@ export default class {
 
         d = `${d} L ${this.pointStart.getX()} ${this.pointStart.getY() + gap.y / 2}`;
 
-        const $path = $(`
-            <path></path>
-        `);
+        const path = this.makeSVG('path', {
+            stroke: '#59ABE4',
+            'stroke-width': 2,
+            fill: '#fff',
+            'fill-opacity': 0,
+            d,
+        });
 
-        $path
-            .attr('stroke', '#59ABE4')
-            .attr('stroke-width', 2)
-            .attr('fill', '#fff')
-            .attr('fill-opacity', 0)
-            .attr('d', $('.path-1').attr('d'));
+        document.getElementById('svg').appendChild(path);
+    }
+    makeSVG(tag, attrs) {
+        const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        for (const k in attrs) {
+            el.setAttribute(k, attrs[k]);
+        }
 
-        $('svg').append($path);
+        return el;
     }
 }
