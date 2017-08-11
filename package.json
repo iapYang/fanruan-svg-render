@@ -1,0 +1,27 @@
+{
+  "name": "finereport-svg-render",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "iapvt cli",
+    "cli": "iapvt -r -s",
+    "build": "iapvt build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iapYang/finereport-svg-render.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iapYang/finereport-svg-render/issues"
+  },
+  "homepage": "https://github.com/iapYang/finereport-svg-render#readme",
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.4.1",
+    "eslint-plugin-html": "^3.1.1",
+    "iapyang-vue-template": "^0.5.5"
+  }
+}
