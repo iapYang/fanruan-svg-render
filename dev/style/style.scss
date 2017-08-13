@@ -36,6 +36,9 @@ body {
         &.purple {
             background-color: $purple;
         }
+        &.yellow {
+            background-color: yellow;
+        }
     }
 
     .div1 {
@@ -141,6 +144,31 @@ body {
     .div21 {
         left: ($width + $gap) * 3;
         top: ($height + $gap) * 5 + $gap * 2;
+    }
+
+    .div22 {
+        left: 0;
+        top: ($height + $gap) * 6 + $gap * 2;
+    }
+
+    .div23 {
+        left: $width + $gap;
+        top: ($height + $gap) * 6 + $gap * 2;
+    }
+
+    .div24 {
+        left: ($width + $gap) * 2;
+        top: ($height + $gap) * 6 + $gap * 2;
+    }
+
+    .div25 {
+        left: ($width + $gap) * 3;
+        top: ($height + $gap) * 6 + $gap * 2;
+    }
+
+    .div26 {
+        left: ($width + $gap) * 4;
+        top: ($height + $gap) * 6 + $gap * 2;
     }
 
     .red {

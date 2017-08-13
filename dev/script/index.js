@@ -45,6 +45,14 @@ new Path(svg, {
 });
 
 new Path(svg, {
+    selector: '.div6',
+    position: 'right',
+}, {
+    selector: '.div7',
+    position: 'left',
+});
+
+new Path(svg, {
     selector: '.div8',
     position: 'right',
 }, {
@@ -146,4 +154,68 @@ new Path(svg, {
 }, {
     selector: '.div19',
     position: 'top',
+});
+
+new Path(svg, {
+    selector: '.div18',
+    position: 'bottom',
+}, {
+    selector: '.div22',
+    position: 'top',
+});
+
+new Path(svg, {
+    selector: '.div22',
+    position: 'right',
+}, {
+    selector: '.div23',
+    position: 'left',
+});
+
+new Path(svg, {
+    selector: '.div23',
+    position: 'right',
+}, {
+    selector: '.div24',
+    position: 'left',
+});
+
+new Path(svg, {
+    selector: '.div24',
+    position: 'right',
+}, {
+    selector: '.div25',
+    position: 'left',
+});
+
+new Path(svg, {
+    selector: '.div25',
+    position: 'right',
+}, {
+    selector: '.div26',
+    position: 'left',
+});
+
+new Path(svg, {
+    selector: '.div21',
+    position: 'bottom',
+}, {
+    selector: '.div24',
+    position: 'top',
+});
+
+new Path(svg, {
+    selector: '.div26',
+    position: 'top',
+}, {
+    selector: '.div15',
+    position: 'bottom',
+});
+
+new Path(svg, {
+    selector: '.div17',
+    position: 'top',
+}, {
+    selector: '.div8',
+    position: 'bottom',
 });
