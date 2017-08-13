@@ -15,8 +15,9 @@ body {
 
 .svg-container {
     position: relative;
-    width: 2000px;
-    height: 2000px;
+    width: 1400px;
+    height: 750px;
+    overflow: hidden;
 
     .block {
         position: absolute;
@@ -27,6 +28,7 @@ body {
         font-size: 14px;
         line-height: $height;
         text-align: center;
+        cursor: pointer;
         &.pink {
             background-color: $pink;
         }
