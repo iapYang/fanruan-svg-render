@@ -6,7 +6,7 @@ const svg = document.getElementById('svg');
 
 new Path(svg, {
     selector: '.red',
-    position: 'bottom',
+    position: 'top',
 }, {
     selector: '.blue',
     position: 'top',

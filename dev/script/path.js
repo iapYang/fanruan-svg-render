@@ -72,44 +72,51 @@ export default class {
             y: -this.ssp.getY() + this.sep.getY(),
         };
 
-        const step = [];
+        const steps = [];
+        steps.push(`M ${this.startPoint.getX()} ${this.startPoint.getY()}`);
+        steps.push(`L ${this.ssp.getX()} ${this.ssp.getY()}`);
+
         if (position === 'top' || position === 'bottom') {
             if (this.ifCross) {
                 const multiplier = gap.x / 2 < 0 ? -1 : 1;
 
-                step[0] = `l ${multiplier * Math.max(Math.abs(gap.x / 2), this.box1.width() + 10)} 0`;
-                step[1] = `l 0 ${gap.y}`;
+                steps.push(`l ${multiplier * Math.max(Math.abs(gap.x / 2), this.box1.width() + 10)} 0`);
+                steps.push(`l 0 ${gap.y}`);
             } else {
-                step[0] = `l 0 ${gap.y / 2}`;
-                step[1] = `l ${gap.x} 0`;
+                steps.push(`l 0 ${gap.y / 2}`);
+                steps.push(`l ${gap.x} 0`);
             }
         } else {
             if (this.ifCross) {
                 const multiplier = gap.y / 2 < 0 ? -1 : 1;
 
-                step[0] = `l 0 ${multiplier * Math.max(Math.abs(gap.y / 2), this.box1.width() + 10)}`;
-                step[1] = `l ${gap.x} 0`;
+                steps.push(`l 0 ${multiplier * Math.max(Math.abs(gap.y / 2), this.box1.width() + 10)}`);
+                steps.push(`l ${gap.x} 0`);
             } else {
-                step[0] = `l ${gap.x / 2} 0`;
-                step[1] = `l 0 ${gap.y}`;
+                steps.push(`l ${gap.x / 2} 0`);
+                steps.push(`l 0 ${gap.y}`);
             }
         }
 
-        step[2] = `L ${this.sep.getX()} ${this.sep.getY()}`;
+        steps.push(`L ${this.sep.getX()} ${this.sep.getY()}`);
 
-        return step;
+        steps.push(`L ${this.endPoint.getX()} ${this.endPoint.getY()}`);
+
+        let d = '';
+
+        steps.forEach(step => {
+            d = `${d} ${step}`;
+        });
+
+        return d;
     }
     render() {
-        const step = this.calcPath(this.position1);
-
-        const d = `M ${this.ssp.getX()} ${this.ssp.getY()} ${step[0]} ${step[1]} ${step[2]}`;
-
         const path = this.makeSVG('path', {
             stroke: '#59ABE4',
             'stroke-width': 2,
             fill: '#fff',
             'fill-opacity': 0,
-            d,
+            d: this.calcPath(this.position1),
         });
 
         this.svg.appendChild(path);
