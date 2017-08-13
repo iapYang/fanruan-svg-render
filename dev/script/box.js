@@ -54,6 +54,12 @@ export default class {
     top() {
         return this.pDA;
     }
+    width() {
+        return this.$box.width();
+    }
+    height() {
+        return this.$box.height();
+    }
     crossCount(line) {
         let count = 0;
 

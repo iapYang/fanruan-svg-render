@@ -13,11 +13,7 @@ export default class {
         this.box1 = new Box(box1.selector);
         this.box2 = new Box(box2.selector);
 
-        this.startPoint = this.box1[this.position1]();
-        this.endPoint = this.box2[this.position2]();
-
-        this.ssp = this.startPoint;
-        this.sep = this.endPoint;
+        this.calcFinalPoint();
 
         this.render();
     }
@@ -27,7 +23,10 @@ export default class {
 
         this.strightLine = new Line(this.startPoint, this.endPoint);
 
-        if (this.box1.crossCount(this.strightLine) + this.box2.crossCount(this.strightLine) > 2) {
+        this.ifCross = this.box1.crossCount(this.strightLine)
+            + this.box2.crossCount(this.strightLine) > 2;
+
+        if (this.ifCross) {
             this.ssp = this.getFinalPoint(this.position1, this.startPoint);
             this.sep = this.getFinalPoint(this.position2, this.endPoint);
         } else {
@@ -64,26 +63,46 @@ export default class {
         });
     }
     refresh() {
-        this.startPoint = this.box1[this.position1]();
-        this.endPoint = this.box2[this.position2]();
-
-
-
-        this.ssp = this.startPoint;
-        this.sep = this.endPoint;
-
+        this.calcFinalPoint();
         this.render();
     }
-    render() {
-        const ifToper = this.ssp.getY() >= this.sep.getY();
-        const ifLefter = this.ssp.getX() >= this.sep.getX();
-
+    calcPath(position) {
         const gap = {
             x: -this.ssp.getX() + this.sep.getX(),
             y: -this.ssp.getY() + this.sep.getY(),
         };
 
-        const d = `M ${this.ssp.getX()} ${this.ssp.getY()} l 0 ${gap.y / 2} l ${gap.x} 0 l 0 ${gap.y / 2}`;
+        const step = [];
+        if (position === 'top' || position === 'bottom') {
+            if (this.ifCross) {
+                const multiplier = gap.x / 2 < 0 ? -1 : 1;
+
+                step[0] = `l ${multiplier * Math.max(Math.abs(gap.x / 2), this.box1.width() + 10)} 0`;
+                step[1] = `l 0 ${gap.y}`;
+            } else {
+                step[0] = `l 0 ${gap.y / 2}`;
+                step[1] = `l ${gap.x} 0`;
+            }
+        } else {
+            if (this.ifCross) {
+                const multiplier = gap.y / 2 < 0 ? -1 : 1;
+
+                step[0] = `l 0 ${multiplier * Math.max(Math.abs(gap.y / 2), this.box1.width() + 10)}`;
+                step[1] = `l ${gap.x} 0`;
+            } else {
+                step[0] = `l ${gap.x / 2} 0`;
+                step[1] = `l 0 ${gap.y}`;
+            }
+        }
+
+        step[2] = `L ${this.sep.getX()} ${this.sep.getY()}`;
+
+        return step;
+    }
+    render() {
+        const step = this.calcPath(this.position1);
+
+        const d = `M ${this.ssp.getX()} ${this.ssp.getY()} ${step[0]} ${step[1]} ${step[2]}`;
 
         const path = this.makeSVG('path', {
             stroke: '#59ABE4',
