@@ -1,10 +1,5 @@
 import '../style/style.scss';
 
-import Point from './point';
-import Path from './path';
+import Box from './box';
 
-const pointA = new Point('.red', 'bottom');
-const pointB = new Point('.blue', 'top');
-
-new Path(pointA, pointB);
-
+new Box('.red');
