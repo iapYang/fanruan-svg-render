@@ -14,6 +14,12 @@ export default class {
     print() {
         console.log(`y = ${this.k}x + ${this.c}`);
     }
+    getP1() {
+        return this.p1;
+    }
+    getP2() {
+        return this.p2;
+    }
     getK() {
         return this.k;
     }
@@ -42,7 +48,7 @@ export default class {
             const lineInfinit = this.k === Infinity ? this : line;
             const lineNormal = this.k === Infinity ? line : this;
 
-            x = lineInfinit.getX();
+            x = lineInfinit.getP1().getX();
 
             cross = new Point({
                 x,

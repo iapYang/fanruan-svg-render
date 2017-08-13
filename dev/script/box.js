@@ -39,7 +39,12 @@ export default class {
             p2: this.pB,
         });
 
-        this.lAB.print();
+        this.lBC = new Line({
+            p1: this.pB,
+            p2: this.pC,
+        });
+
+        this.crossCount();
     }
     left() {
         return this.pAB;
@@ -54,6 +59,6 @@ export default class {
         return this.pAD;
     }
     crossCount(line) {
-        
+        // console.log(this.lAB.crossCount(this.lBC));
     }
 }
