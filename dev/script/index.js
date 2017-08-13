@@ -1,5 +1,12 @@
 import '../style/style.scss';
 
 import Box from './box';
+import Line from './line';
 
-new Box('.red');
+const b1 = new Box('.red');
+const b2 = new Box('.blue');
+
+new Line({
+    p1: b1.bottom(),
+    p2: b2.top(),
+}).print();

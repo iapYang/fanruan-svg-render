@@ -1,6 +1,7 @@
 import $ from 'jquery';
 
 import Point from './point';
+import Line from './line';
 
 export default class {
     constructor(selector) {
@@ -32,7 +33,17 @@ export default class {
         this.pBC = this.pB.middlePoint(this.pC);
         this.pCD = this.pC.middlePoint(this.pD);
         this.pAD = this.pA.middlePoint(this.pD);
-
-        this.pAB.print();
+    }
+    left() {
+        return this.pAB;
+    }
+    bottom() {
+        return this.pBC;
+    }
+    right() {
+        return this.pCD;
+    }
+    top() {
+        return this.pAD;
     }
 }
