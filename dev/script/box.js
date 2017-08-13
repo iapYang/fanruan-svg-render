@@ -33,6 +33,13 @@ export default class {
         this.pBC = this.pB.middlePoint(this.pC);
         this.pCD = this.pC.middlePoint(this.pD);
         this.pAD = this.pA.middlePoint(this.pD);
+
+        this.lAB = new Line({
+            p1: this.pA,
+            p2: this.pB,
+        });
+
+        this.lAB.print();
     }
     left() {
         return this.pAB;
@@ -45,5 +52,8 @@ export default class {
     }
     top() {
         return this.pAD;
+    }
+    crossCount(line) {
+        
     }
 }

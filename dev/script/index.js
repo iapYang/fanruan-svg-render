@@ -6,7 +6,7 @@ import Line from './line';
 const b1 = new Box('.red');
 const b2 = new Box('.blue');
 
-new Line({
+const l1 = new Line({
     p1: b1.bottom(),
     p2: b2.top(),
 }).print();

@@ -1,3 +1,5 @@
+import Point from './point';
+
 export default class {
     constructor({
         p1,
@@ -11,5 +13,51 @@ export default class {
     }
     print() {
         console.log(`y = ${this.k}x + ${this.c}`);
+    }
+    getK() {
+        return this.k;
+    }
+    getC() {
+        return this.c;
+    }
+    calcY(x) {
+        return this.k * x + this.c;
+    }
+    checkPointOnline(point) {
+        const xFit = point.getX() <= Math.max(this.p1.getX(), this.p2.getX())
+            && point.getX() >= Math.min(this.p1.getX(), this.p2.getX());
+        const yFit = point.getY() <= Math.max(this.p1.getY(), this.p2.getY())
+            && point.getY() >= Math.min(this.p1.getY(), this.p2.getY());
+
+        return xFit && yFit;
+    }
+    crossCount(line) {
+        let x, cross;
+
+        if (this.k === line.getK()) {
+            return 0;
+        }
+
+        if (this.k === Infinity || line.getK() === Infinity) {
+            const lineInfinit = this.k === Infinity ? this : line;
+            const lineNormal = this.k === Infinity ? line : this;
+
+            x = lineInfinit.getX();
+
+            cross = new Point({
+                x,
+                y: lineNormal.calcY(x),
+            });
+        } else {
+            x = (line.getC() - this.getC()) / (this.getK() - line.getK());
+
+            cross = new Point({
+                x,
+                y: this.calcY(x),
+            });
+        }
+
+        // true: no line has the point
+        return !(this.checkPointOnline(cross) && line.checkPointOnline(cross)) ? 0 : 1;
     }
 }
