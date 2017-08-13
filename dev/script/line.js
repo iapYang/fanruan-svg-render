@@ -24,46 +24,7 @@ export default class {
     getC() {
         return this.c;
     }
-    calcY(x) {
-        return this.k * x + this.c;
-    }
-    checkPointOnline(point) {
-        const xFit = point.getX() <= Math.max(this.p1.getX(), this.p2.getX())
-            && point.getX() >= Math.min(this.p1.getX(), this.p2.getX());
-        const yFit = point.getY() <= Math.max(this.p1.getY(), this.p2.getY())
-            && point.getY() >= Math.min(this.p1.getY(), this.p2.getY());
-
-        return yFit;
-    }
     crossCount(line) {
-        // let x, cross;
-
-        // if (this.k === line.getK()) {
-        //     return 0;
-        // }
-
-        // if (this.k === Infinity || line.getK() === Infinity) {
-        //     const lineInfinit = this.k === Infinity ? this : line;
-        //     const lineNormal = this.k === Infinity ? line : this;
-
-        //     x = lineInfinit.getP1().getX();
-
-        //     cross = new Point({
-        //         x,
-        //         y: lineNormal.calcY(x),
-        //     });
-        // } else {
-        //     x = (line.getC() - this.getC()) / (this.getK() - line.getK());
-
-        //     cross = new Point({
-        //         x,
-        //         y: this.calcY(x),
-        //     });
-        // }
-
-        // // true: no line has the point
-        // return !(this.checkPointOnline(cross) && line.checkPointOnline(cross)) ? 0 : 1;
-
         const aa = this.p1;
         const bb = this.p2;
         const cc = line.getP1();

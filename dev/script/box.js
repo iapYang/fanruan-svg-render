@@ -58,11 +58,9 @@ export default class {
         let count = 0;
 
         [this.lAB, this.lBC, this.lCD, this.lDA].forEach((l, index) => {
-            console.log('index', index, 'count', l.crossCount(line));
-            // count += l.crossCount(line);
+            count += l.crossCount(line);
         });
 
         return count;
-        // console.log(this.lAB.crossCount(this.lBC));
     }
 }
