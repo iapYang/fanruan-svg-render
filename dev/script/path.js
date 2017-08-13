@@ -1,22 +1,31 @@
 import $ from 'jquery';
 
+import Box from './box';
+
 export default class {
-    constructor(pointA, pointB) {
-        this.svg = document.getElementById('svg');
-        this.pointStart = pointA;
-        this.pointEnd = pointB;
+    constructor(svg, box1, box2) {
+        this.svg = svg;
+        this.box1 = new Box(box1.selector);
+        this.box2 = new Box(box2.selector);
+
+        this.startPoint = this.box1[box1.position]();
+        this.endPoint = this.box2[box2.position]();
+
+        this.ssp = this.startPoint;
+        this.sep = this.endPoint;
 
         this.render();
     }
     render() {
-        let d = `M ${this.pointStart.getX()} ${this.pointStart.getY()}`;
+        const ifToper = this.ssp.getY() >= this.sep.getY();
+        const ifLefter = this.ssp.getX() >= this.sep.getX();
 
         const gap = {
-            x: this.pointEnd.getX() - this.pointStart.getX(),
-            y: this.pointEnd.getY() - this.pointStart.getY(),
+            x: -(this.ssp.getX() - this.sep.getX()),
+            y: -(this.ssp.getY() - this.sep.getY()),
         };
 
-        d = `${d} L ${this.pointStart.getX()} ${this.pointStart.getY() + gap.y / 2}`;
+        const d = `M ${this.ssp.getX()} ${this.ssp.getY()} l 0 ${gap.y / 2} l ${gap.x} 0 l 0 ${gap.y / 2}`;
 
         const path = this.makeSVG('path', {
             stroke: '#59ABE4',

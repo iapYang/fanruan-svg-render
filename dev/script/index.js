@@ -1,11 +1,13 @@
 import '../style/style.scss';
 
-import Box from './box';
-import Line from './line';
+import Path from './path';
 
-const b1 = new Box('.red');
-const b2 = new Box('.blue');
+const svg = document.getElementById('svg');
 
-const l1 = new Line(b1.bottom(), b2.top());
-
-console.log(b1.crossCount(l1));
+new Path(svg, {
+    selector: '.red',
+    position: 'bottom',
+}, {
+    selector: '.blue',
+    position: 'top',
+});
