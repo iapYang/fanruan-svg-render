@@ -1,4 +1,11 @@
 @import 'reset';
+
+$pink: pink;
+$blue: lightblue;
+$width: 100px;
+$height: 30px;
+$gap: 20px;
+
 html,
 body {
     width: 100%;
@@ -13,10 +20,69 @@ body {
 
     .block {
         position: absolute;
-        width: 100px;
-        height: 30px;
+        width: $width;
+        height: $height;
         background-color: red;
         z-index: 2;
+        font-size: 14px;
+        line-height: $height;
+        text-align: center;
+        &.pink {
+            background-color: $pink;
+        }
+        &.light-blue {
+            background-color: $blue;
+        }
+    }
+
+    .div1 {
+        left: 0;
+        top: $gap;
+    }
+
+    .div2 {
+        left: $width + $gap;
+        top: $gap;
+    }
+
+    .div3 {
+        left: 0;
+        top: $height + $gap + $gap;
+    }
+
+    .div4 {
+        left: $width + $gap;
+        top: $height + $gap + $gap;
+    }
+
+    .div5 {
+        left: ($width + $gap) * 2;
+        top: $height + $gap + $gap;
+    }
+
+    .div6 {
+        left: ($width + $gap) * 3;
+        top: $height + $gap + $gap;
+    }
+
+    .div7 {
+        left: ($width + $gap) * 4;
+        top: $height + $gap + $gap;
+    }
+
+    .div8 {
+        left: ($width + $gap) * 5 + $gap * 2;
+        top: ($height + $gap) * 2 + $gap * 2;
+    }
+
+    .div9 {
+        left: ($width + $gap) * 6 + $gap * 2;
+        top: ($height + $gap) * 2 + $gap * 2;
+    }
+
+    .div10 {
+        left: ($width + $gap) * 7 + $gap * 2;
+        top: ($height + $gap) * 2 + $gap * 2;
     }
 
     .red {
