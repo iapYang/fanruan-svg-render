@@ -4,29 +4,36 @@ import Point from './point';
 import Line from './line';
 
 export default class {
-    constructor(selector) {
+    constructor(selector, path) {
         this.$box = $(selector);
+        this.path = path;
+        this.dragable = false;
 
+        this.refresh();
+
+        this.addEventListener();
+    }
+    refresh() {
         this.offset = this.$box.offset();
 
         this.pA = new Point({
-            x : this.offset.left,
-            y : this.offset.top,
+            x: this.offset.left,
+            y: this.offset.top,
         });
 
         this.pB = new Point({
-            x : this.offset.left,
-            y : this.offset.top + this.$box.height(),
+            x: this.offset.left,
+            y: this.offset.top + this.$box.height(),
         });
 
         this.pC = new Point({
-            x : this.offset.left + this.$box.width(),
-            y : this.offset.top + this.$box.height(),
+            x: this.offset.left + this.$box.width(),
+            y: this.offset.top + this.$box.height(),
         });
 
         this.pD = new Point({
-            x : this.offset.left + this.$box.width(),
-            y : this.offset.top,
+            x: this.offset.left + this.$box.width(),
+            y: this.offset.top,
         });
 
         this.pAB = this.pA.middlePoint(this.pB);
@@ -68,5 +75,26 @@ export default class {
         });
 
         return count;
+    }
+    addEventListener() {
+        this.$box
+            .on('mousedown', () => {
+                this.dragable = true;
+            });
+        $(document)
+            .on('mousemove', e => {
+                if (this.dragable) {
+                    this.$box.offset({
+                        left: e.pageX - this.$box.width() / 2,
+                        top: e.pageY - this.$box.height() / 2,
+                    });
+                    this.refresh();
+
+                    this.path.refresh();
+                }
+            })
+            .on('mouseup', () => {
+                this.dragable = false;
+            });
     }
 }

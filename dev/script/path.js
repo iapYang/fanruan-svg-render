@@ -10,8 +10,8 @@ export default class {
         this.position1 = box1.position;
         this.position2 = box2.position;
 
-        this.box1 = new Box(box1.selector);
-        this.box2 = new Box(box2.selector);
+        this.box1 = new Box(box1.selector, this);
+        this.box2 = new Box(box2.selector, this);
 
         this.calcFinalPoint();
 
@@ -64,7 +64,8 @@ export default class {
     }
     refresh() {
         this.calcFinalPoint();
-        this.render();
+        this.path.setAttribute('d', this.calcPath(this.position1));
+        this.arrow.setAttribute('d', this.calcArrowPath());
     }
     calcPath(position) {
         const gap = {
@@ -110,7 +111,7 @@ export default class {
 
         return d;
     }
-    arrowPath() {
+    calcArrowPath() {
         const length = 5;
         const d = `M ${this.endPoint.getX()} ${this.endPoint.getY()}`;
         switch (this.position2) {
@@ -127,7 +128,7 @@ export default class {
         }
     }
     render() {
-        const path = this.makeSVG('path', {
+        this.path = this.makeSVG('path', {
             stroke: '#59ABE4',
             'stroke-width': 2,
             fill: '#fff',
@@ -135,18 +136,18 @@ export default class {
             d: this.calcPath(this.position1),
         });
 
-        const arrow = this.makeSVG('path', {
+        this.arrow = this.makeSVG('path', {
             stroke: '#59ABE4',
             'stroke-width': 2,
             fill: '#59ABE4',
             'fill-opacity': 1,
-            d: this.arrowPath(),
+            d: this.calcArrowPath(),
         });
 
         const g = this.makeSVG('g', {});
 
-        g.appendChild(path);
-        g.appendChild(arrow);
+        g.appendChild(this.path);
+        g.appendChild(this.arrow);
 
         this.svg.appendChild(g);
     }
