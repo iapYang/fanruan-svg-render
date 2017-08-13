@@ -13,12 +13,50 @@ body {
     height: 100%;
 }
 
+.container {
+    position: relative;
+    display: inline-block;
+    border: 1px solid black;
+}
+
+.left-part {
+    position: absolute;
+    width: 200px;
+    height: 100%;
+    z-index: 1;
+    div {
+        display: inline-block;
+        width: 100%;
+        height: 250px;
+        text-align: center;
+        border: 1px solid black;
+        
+        span {
+            display: inline-block;
+            font-size: 60px;
+            writing-mode: vertical-rl;
+            vertical-align: middle;
+        }
+
+        &:after {
+            content: "";
+            width: 0;
+            height: 100%;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+}
+
 .svg-container {
     position: relative;
+    margin-left: 200px;
     width: 1400px;
     height: 750px;
     overflow: hidden;
-
+    z-index: 2;
+    border: 1px solid black;
+    
     .block {
         position: absolute;
         width: $width;
@@ -185,7 +223,7 @@ body {
 }
 
 svg {
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 100%;
     z-index: 1;
