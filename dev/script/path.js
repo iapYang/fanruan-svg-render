@@ -10,8 +10,8 @@ export default class {
         this.position1 = box1.position;
         this.position2 = box2.position;
 
-        this.box1 = new Box(box1.selector, this);
-        this.box2 = new Box(box2.selector, this);
+        this.box1 = new Box(box1.selector, this, this.svg);
+        this.box2 = new Box(box2.selector, this, this.svg);
 
         this.calcFinalPoint();
 

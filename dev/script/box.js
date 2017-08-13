@@ -4,36 +4,38 @@ import Point from './point';
 import Line from './line';
 
 export default class {
-    constructor(selector, path) {
+    constructor(selector, path, svg) {
         this.$box = $(selector);
         this.path = path;
         this.dragable = false;
+
+        this.$svg = $(svg);
 
         this.refresh();
 
         this.addEventListener();
     }
     refresh() {
-        this.offset = this.$box.offset();
+        this.position = this.$box.position();
 
         this.pA = new Point({
-            x: this.offset.left,
-            y: this.offset.top,
+            x: this.position.left,
+            y: this.position.top,
         });
 
         this.pB = new Point({
-            x: this.offset.left,
-            y: this.offset.top + this.$box.height(),
+            x: this.position.left,
+            y: this.position.top + this.$box.height(),
         });
 
         this.pC = new Point({
-            x: this.offset.left + this.$box.width(),
-            y: this.offset.top + this.$box.height(),
+            x: this.position.left + this.$box.width(),
+            y: this.position.top + this.$box.height(),
         });
 
         this.pD = new Point({
-            x: this.offset.left + this.$box.width(),
-            y: this.offset.top,
+            x: this.position.left + this.$box.width(),
+            y: this.position.top,
         });
 
         this.pAB = this.pA.middlePoint(this.pB);
@@ -80,13 +82,15 @@ export default class {
         this.$box
             .on('mousedown', () => {
                 this.dragable = true;
+                console.log('233333');
             });
         $(document)
             .on('mousemove', e => {
                 if (this.dragable) {
-                    this.$box.offset({
-                        left: e.pageX - this.$box.width() / 2,
-                        top: e.pageY - this.$box.height() / 2,
+                    console.log(e);
+                    this.$box.css({
+                        left: e.pageX - this.$box.width() / 2 - this.$svg.offset().left,
+                        top: e.pageY - this.$box.height() / 2 - this.$svg.offset().top,
                     });
                     this.refresh();
 
