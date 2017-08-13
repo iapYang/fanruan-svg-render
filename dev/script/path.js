@@ -2,6 +2,7 @@ import $ from 'jquery';
 
 export default class {
     constructor(pointA, pointB) {
+        this.svg = document.getElementById('svg');
         this.pointStart = pointA;
         this.pointEnd = pointB;
 
@@ -25,7 +26,7 @@ export default class {
             d,
         });
 
-        document.getElementById('svg').appendChild(path);
+        this.svg.appendChild(path);
     }
     makeSVG(tag, attrs) {
         const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
