@@ -36,32 +36,62 @@ export default class {
         return yFit;
     }
     crossCount(line) {
-        let x, cross;
+        // let x, cross;
 
-        if (this.k === line.getK()) {
+        // if (this.k === line.getK()) {
+        //     return 0;
+        // }
+
+        // if (this.k === Infinity || line.getK() === Infinity) {
+        //     const lineInfinit = this.k === Infinity ? this : line;
+        //     const lineNormal = this.k === Infinity ? line : this;
+
+        //     x = lineInfinit.getP1().getX();
+
+        //     cross = new Point({
+        //         x,
+        //         y: lineNormal.calcY(x),
+        //     });
+        // } else {
+        //     x = (line.getC() - this.getC()) / (this.getK() - line.getK());
+
+        //     cross = new Point({
+        //         x,
+        //         y: this.calcY(x),
+        //     });
+        // }
+
+        // // true: no line has the point
+        // return !(this.checkPointOnline(cross) && line.checkPointOnline(cross)) ? 0 : 1;
+
+        const aa = this.p1;
+        const bb = this.p2;
+        const cc = line.getP1();
+        const dd = line.getP2();
+
+        if (Math.max(aa.getX(), bb.getX()) < Math.min(cc.getX(), dd.getX())) {
+            return 0;
+        }
+        if (Math.max(aa.getY(), bb.getY()) < Math.min(cc.getY(), dd.getY())) {
+            return 0;
+        }
+        if (Math.max(cc.getX(), dd.getX()) < Math.min(aa.getX(), bb.getX())) {
+            return 0;
+        }
+        if (Math.max(cc.getY(), dd.getY()) < Math.min(aa.getY(), bb.getY())) {
+            return 0;
+        }
+        if (this.mult(cc, bb, aa) * this.mult(bb, dd, aa) < 0) {
+            return 0;
+        }
+        if (this.mult(aa, dd, cc) * this.mult(dd, bb, cc) < 0) {
             return 0;
         }
 
-        if (this.k === Infinity || line.getK() === Infinity) {
-            const lineInfinit = this.k === Infinity ? this : line;
-            const lineNormal = this.k === Infinity ? line : this;
-
-            x = lineInfinit.getP1().getX();
-
-            cross = new Point({
-                x,
-                y: lineNormal.calcY(x),
-            });
-        } else {
-            x = (line.getC() - this.getC()) / (this.getK() - line.getK());
-
-            cross = new Point({
-                x,
-                y: this.calcY(x),
-            });
-        }
-
-        // true: no line has the point
-        return !(this.checkPointOnline(cross) && line.checkPointOnline(cross)) ? 0 : 1;
+        return 1;
+    }
+    mult(a, b, c) {
+        return (a.getX() - c.getX()) * (b.getY() - c.getY()) -
+            (b.getX() - c.getX()) * (a.getY() - c.getY());
     }
 }
