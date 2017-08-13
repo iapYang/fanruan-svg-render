@@ -90,7 +90,7 @@ export default class {
             if (this.ifCross) {
                 const multiplier = gap.y / 2 < 0 ? -1 : 1;
 
-                steps.push(`l 0 ${multiplier * Math.max(Math.abs(gap.y / 2), this.box1.width() + 10)}`);
+                steps.push(`l 0 ${multiplier * Math.max(Math.abs(gap.y / 2), this.box1.height() + 10)}`);
                 steps.push(`l ${gap.x} 0`);
             } else {
                 steps.push(`l ${gap.x / 2} 0`);
