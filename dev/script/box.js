@@ -34,8 +34,6 @@ export default class {
         this.pCD = this.pC.middlePoint(this.pD);
         this.pDA = this.pD.middlePoint(this.pA);
 
-        console.log(this.pA, this.pB, this.pC, this.pD);
-
         this.lAB = new Line(this.pA, this.pB);
 
         this.lBC = new Line(this.pB, this.pC);
@@ -43,8 +41,6 @@ export default class {
         this.lCD = new Line(this.pC, this.pD);
 
         this.lDA = new Line(this.pD, this.pA);
-
-        console.log('finish box');
     }
     left() {
         return this.pAB;
@@ -61,9 +57,8 @@ export default class {
     crossCount(line) {
         let count = 0;
 
-        console.log(line);
-
-        [this.lAB, this.lBC, this.lCD, this.lDA].forEach(l => {
+        [this.lAB, this.lBC, this.lCD, this.lDA].forEach((l, index) => {
+            console.log(index, l.crossCount(line));
             count += l.crossCount(line);
         });
 

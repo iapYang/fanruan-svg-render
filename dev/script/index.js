@@ -8,6 +8,4 @@ const b2 = new Box('.blue');
 
 const l1 = new Line(b1.bottom(), b2.top());
 
-// console.log(l1);
-
-// console.log(b1.crossCount(l1));
+console.log(b1.crossCount(l1));
