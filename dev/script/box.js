@@ -25,8 +25,8 @@ export default class {
         });
 
         this.pD = new Point({
-            x : this.offset.left,
-            y : this.offset.top + this.$box.height(),
+            x : this.offset.left + this.$box.width(),
+            y : this.offset.top,
         });
 
         this.pAB = this.pA.middlePoint(this.pB);
@@ -58,8 +58,8 @@ export default class {
         let count = 0;
 
         [this.lAB, this.lBC, this.lCD, this.lDA].forEach((l, index) => {
-            console.log(index, l.crossCount(line));
-            count += l.crossCount(line);
+            console.log('index', index, 'count', l.crossCount(line));
+            // count += l.crossCount(line);
         });
 
         return count;

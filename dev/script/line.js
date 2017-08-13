@@ -6,6 +6,7 @@ export default class {
         this.p1 = p1;
         this.p2 = p2;
         this.k = (this.p2.getY() - this.p1.getY()) / (this.p2.getX() - this.p1.getX());
+        this.k = this.k === -Infinity ? Infinity : this.k;
         this.c = this.p1.getY() - this.k * this.p1.getX();
     }
     print() {
@@ -32,7 +33,7 @@ export default class {
         const yFit = point.getY() <= Math.max(this.p1.getY(), this.p2.getY())
             && point.getY() >= Math.min(this.p1.getY(), this.p2.getY());
 
-        return xFit && yFit;
+        return yFit;
     }
     crossCount(line) {
         let x, cross;
