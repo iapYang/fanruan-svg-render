@@ -110,6 +110,22 @@ export default class {
 
         return d;
     }
+    arrowPath() {
+        const length = 5;
+        const d = `M ${this.endPoint.getX()} ${this.endPoint.getY()}`;
+        switch (this.position2) {
+            case 'left':
+                return `${d} l -${length} -${length} ${d} l -${length} ${length} Z`;
+            case 'top':
+                return `${d} l -${length} -${length} ${d} l ${length} -${length} Z`;
+            case 'bottom':
+                return `${d} l -${length} ${length} ${d} l ${length} ${length} Z`;
+            case 'right':
+                return `${d} l ${length} -${length} ${d} l ${length} ${length} Z`;
+            default:
+                return d;
+        }
+    }
     render() {
         const path = this.makeSVG('path', {
             stroke: '#59ABE4',
@@ -119,7 +135,20 @@ export default class {
             d: this.calcPath(this.position1),
         });
 
-        this.svg.appendChild(path);
+        const arrow = this.makeSVG('path', {
+            stroke: '#59ABE4',
+            'stroke-width': 2,
+            fill: '#59ABE4',
+            'fill-opacity': 1,
+            d: this.arrowPath(),
+        });
+
+        const g = this.makeSVG('g', {});
+
+        g.appendChild(path);
+        g.appendChild(arrow);
+
+        this.svg.appendChild(g);
     }
     makeSVG(tag, attrs) {
         const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
