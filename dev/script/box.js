@@ -82,12 +82,10 @@ export default class {
         this.$box
             .on('mousedown', () => {
                 this.dragable = true;
-                console.log('233333');
             });
         $(document)
             .on('mousemove', e => {
                 if (this.dragable) {
-                    console.log(e);
                     this.$box.css({
                         left: e.pageX - this.$box.width() / 2 - this.$svg.offset().left,
                         top: e.pageY - this.$box.height() / 2 - this.$svg.offset().top,

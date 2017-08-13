@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 import Box from './box';
 import Line from './line';
 import Point from './point';
@@ -16,6 +14,8 @@ export default class {
         this.calcFinalPoint();
 
         this.render();
+
+        this.addEventListener();
     }
     calcFinalPoint() {
         this.startPoint = this.box1[this.position1]();
@@ -158,5 +158,17 @@ export default class {
         }
 
         return el;
+    }
+    addEventListener() {
+        this.path.addEventListener('click', e => {
+            this.path.classList.add('active');
+            this.arrow.classList.add('active');
+
+            e.stopPropagation();
+        });
+        this.svg.addEventListener('click', e => {
+            this.path.classList.remove('active');
+            this.arrow.classList.remove('active');
+        });
     }
 }
