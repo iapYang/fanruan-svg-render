@@ -1,8 +1,8 @@
 @import 'reset';
 
-$pink: pink;
-$blue: lightblue;
-$purple: purple;
+$pink: #ffcbff;
+$blue: #d2edfe;
+$purple: #ccccfe;
 $width: 100px;
 $height: 30px;
 $gap: 60px;
@@ -29,7 +29,11 @@ body {
         width: 100%;
         height: 250px;
         text-align: center;
-        border: 1px solid black;
+        border-right: 1px solid black;
+        &:nth-child(2) {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+        }
         
         span {
             display: inline-block;
@@ -50,12 +54,11 @@ body {
 
 .svg-container {
     position: relative;
-    margin-left: 200px;
+    margin-left: 250px;
     width: 1400px;
     height: 750px;
     overflow: hidden;
     z-index: 2;
-    border: 1px solid black;
     
     .block {
         position: absolute;
