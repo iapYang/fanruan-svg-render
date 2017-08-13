@@ -234,4 +234,8 @@ svg {
     path.active {
         stroke: red;
     }
+
+    circle.active {
+        fill-opacity: 1;
+    }
 }

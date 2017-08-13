@@ -144,12 +144,51 @@ export default class {
             d: this.calcArrowPath(),
         });
 
+        this.startCircle = this.calcCircle(this.startPoint, this.position1);
+        this.endCircle = this.calcCircle(this.endPoint, this.position2);
+
         const g = this.makeSVG('g', {});
 
         g.appendChild(this.path);
         g.appendChild(this.arrow);
+        g.appendChild(this.startCircle);
+        g.appendChild(this.endCircle);
 
         this.svg.appendChild(g);
+    }
+    calcCircle(point, position) {
+        const r = 5;
+        let cx, cy;
+        switch (position) {
+            case 'top':
+                cx = point.getX();
+                cy = point.getY() - r;
+                break;
+            case 'left':
+                cx = point.getX() - r;
+                cy = point.getY();
+                break;
+            case 'right':
+                cx = point.getX() + r;
+                cy = point.getY();
+                break;
+            case 'bottom':
+                cx = point.getX();
+                cy = point.getY() + r;
+                break;
+            default:
+                cx = point.getX();
+                cy = point.getY();
+                break;
+        }
+
+        return this.makeSVG('circle', {
+            cx,
+            cy,
+            r,
+            fill: '#59ABE4',
+            'fill-opacity': 0,
+        });
     }
     makeSVG(tag, attrs) {
         const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
@@ -166,9 +205,25 @@ export default class {
 
             e.stopPropagation();
         });
+        this.arrow.addEventListener('click', e => {
+            this.path.classList.add('active');
+            this.arrow.classList.add('active');
+
+            e.stopPropagation();
+        });
         this.svg.addEventListener('click', e => {
             this.path.classList.remove('active');
             this.arrow.classList.remove('active');
+            this.startCircle.classList.remove('active');
+            this.endCircle.classList.remove('active');
+        });
+        this.startCircle.addEventListener('click', e => {
+            this.startCircle.classList.add('active');
+            e.stopPropagation();
+        });
+        this.endCircle.addEventListener('click', e => {
+            this.endCircle.classList.add('active');
+            e.stopPropagation();
         });
     }
 }
