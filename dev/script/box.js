@@ -32,19 +32,19 @@ export default class {
         this.pAB = this.pA.middlePoint(this.pB);
         this.pBC = this.pB.middlePoint(this.pC);
         this.pCD = this.pC.middlePoint(this.pD);
-        this.pAD = this.pA.middlePoint(this.pD);
+        this.pDA = this.pD.middlePoint(this.pA);
 
-        this.lAB = new Line({
-            p1: this.pA,
-            p2: this.pB,
-        });
+        console.log(this.pA, this.pB, this.pC, this.pD);
 
-        this.lBC = new Line({
-            p1: this.pB,
-            p2: this.pC,
-        });
+        this.lAB = new Line(this.pA, this.pB);
 
-        this.crossCount();
+        this.lBC = new Line(this.pB, this.pC);
+
+        this.lCD = new Line(this.pC, this.pD);
+
+        this.lDA = new Line(this.pD, this.pA);
+
+        console.log('finish box');
     }
     left() {
         return this.pAB;
@@ -56,9 +56,18 @@ export default class {
         return this.pCD;
     }
     top() {
-        return this.pAD;
+        return this.pDA;
     }
     crossCount(line) {
+        let count = 0;
+
+        console.log(line);
+
+        [this.lAB, this.lBC, this.lCD, this.lDA].forEach(l => {
+            count += l.crossCount(line);
+        });
+
+        return count;
         // console.log(this.lAB.crossCount(this.lBC));
     }
 }
